@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption/Decryption</title>
+    <script src="javascript.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { display: flex; justify-content: space-between; padding: 20px; }
+        .box { width: 45%; border: 1px solid #ccc; padding: 20px; }
+        textarea, input, select { width: 100%; margin: 10px 0; padding: 5px; }
+        button { background: black; color: white; padding: 10px; border: none; width: 100%; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>AES Encryption</h2>
+            <label>Enter Plain Text to Encrypt:</label>
+            <textarea id="plainText" placeholder="Enter plain text to be Encrypted"></textarea>
+            <label>Select Cipher Mode:</label>
+            <select id="cipherMode">
+                <option value="CBC">CBC</option>
+            </select>
+            <label>Select Padding:</label>
+            <select id="padding">
+                <option value="Pkcs5Padding">PKCS5Padding</option>
+            </select>
+            <label>Enter IV (Optional):</label>
+            <input type="text" id="iv" placeholder="Enter initialization vector">
+            <label>Key Size in Bits:</label>
+            <select id="keySize">
+                <option value="128">128</option>
+            </select>
+            <label>Enter Secret Key:</label>
+            <input type="text" id="secretKey" placeholder="Enter secret key">
+            <button onclick="encryptText()">Encrypt</button>
+            <h3>AES Encrypted Output (Binary):</h3>
+            <p id="encryptedOutput"></p>
+        </div>
+        <div class="box">
+            <h2>AES Decryption</h2>
+            <label>Enter Binary Encrypted Text:</label>
+            <textarea id="encryptedText" placeholder="Enter binary text to be Decrypted"></textarea>
+            <label>Select Cipher Mode:</label>
+            <select id="decipherMode">
+                <option value="CBC">CBC</option>
+            </select>
+            <label>Select Padding:</label>
+            <select id="decPadding">
+                <option value="Pkcs5Padding">PKCS5Padding</option>
+            </select>
+            <label>Enter IV Used During Encryption (Optional):</label>
+            <input type="text" id="decIv" placeholder="Enter initialization vector">
+            <label>Key Size in Bits:</label>
+            <select id="decKeySize">
+                <option value="128">128</option>
+            </select>
+            <label>Enter Secret Key used for Encryption:</label>
+            <input type="text" id="decSecretKey" placeholder="Enter secret key">
+            <button onclick="decryptText()">Decrypt</button>
+            <h3>AES Decrypted Output:</h3>
+            <p id="decryptedOutput"></p>
+        </div>
+    </div>
+    <script>
+        function stringToBinary(str) {
+            return str.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+        }
+
+        function binaryToString(binary) {
+            return binary.split(' ').map(bin => String.fromCharCode(parseInt(bin, 2))).join('');
+        }
+
+        function encryptText() {
+            let plainText = document.getElementById("plainText").value;
+            let secretKey = document.getElementById("secretKey").value;
+            let iv = document.getElementById("iv").value || CryptoJS.enc.Hex.parse("00000000000000000000000000000000"); // Default IV as zero-bytes
+            
+            let key = CryptoJS.enc.Utf8.parse(secretKey);
+            let ivParsed = typeof iv === "string" ? CryptoJS.enc.Utf8.parse(iv) : iv;
+            let encrypted = CryptoJS.AES.encrypt(plainText, key, {
+                iv: ivParsed,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            document.getElementById("encryptedOutput").innerText = stringToBinary(encrypted.toString());
+        }
+
+        function decryptText() {
+            let binaryEncryptedText = document.getElementById("encryptedText").value;
+            let encryptedText = binaryToString(binaryEncryptedText);
+            let secretKey = document.getElementById("decSecretKey").value;
+            let iv = document.getElementById("decIv").value || CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+            
+            let key = CryptoJS.enc.Utf8.parse(secretKey);
+            let ivParsed = typeof iv === "string" ? CryptoJS.enc.Utf8.parse(iv) : iv;
+            let decrypted = CryptoJS.AES.decrypt(encryptedText, key, {
+                iv: ivParsed,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            document.getElementById("decryptedOutput").innerText = decrypted.toString(CryptoJS.enc.Utf8);
+        }
+    </script>
+</body>
+</html>
