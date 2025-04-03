@@ -10,7 +10,7 @@ this is single webpage project that is used for you personal password encryption
 
 if you deal 🤝 with 10 to 20 or 100000 username and password so this is right place to explore
 
-use this single webpage for encryption and decryption and store on you note (i.e google keep note)
+use this single webpage for encryption and decryption and store on your note (i.e google keep note)
 
 #Encryption
 this generate the string into binary
