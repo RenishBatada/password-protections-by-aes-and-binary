@@ -46,15 +46,11 @@ Provides encrypted output in binary format.
 
 Decrypts binary encrypted text back to the original string.
 
-Setup
-
-Download the crypto-js.js library and place it in the project folder.
-
-Ensure the index.html file includes the local crypto-js.js instead of a CDN.
+#Setup
 
 Open the index.html file in a web browser to use the tool.
 
-Usage
+#Usage
 
 Enter text in the encryption section and provide a secret key.
 
