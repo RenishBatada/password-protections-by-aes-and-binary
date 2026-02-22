@@ -1,72 +1,184 @@
-# password-protections-by-aes-and-binary
+# 🔐 AES Encryption & Decryption Tool
 
-# AES Encryption/Decryption Webpage
+> 🌟 **Securely encrypt and decrypt your sensitive data with AES-128 in binary format**
 
-# Overview
+![License](https://img.shields.io/badge/license-Custom-blue?style=flat-square)
+![Python](https://img.shields.io/badge/python-3%2B-blue?style=flat-square)
+![HTML](https://img.shields.io/badge/html5-orange?style=flat-square)
+![JavaScript](https://img.shields.io/badge/javascript-yellow?style=flat-square)
 
-# This project provides a web-based tool for encrypting and decrypting text using AES-128 in CBC mode.
+## 📋 Table of Contents
 
-this is single webpage project that is used for you personal password encryption and decryption 
+- [🎯 Overview](#-overview)
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [⚙️ Setup](#️-setup)
+- [📖 Usage](#-usage)
+- [🔧 How It Works](#-how-it-works)
+- [⚖️ License](#️-license)
+- [📞 Support](#-support)
 
-if you deal 🤝 with 10 to 20 or 100000 username and password so this is right place to explore
+## 🎯 Overview
 
-use this single webpage for encryption and decryption and
-you can store on your note (i.e google keep note)
+This project provides a **web-based tool** for encrypting and decrypting text using **AES-128 in CBC mode** with binary output. Perfect for personal password management! 🛡️
 
-#example
-#your password is : Abcd@156 the you should add at font and end side i.e (@dvc,@nbc) so you password now is @dvcAbcd@156@nbc 
-# you take the key is : Rjktrblnel@45269
-## Note : if you add prefix and post fix you have to remember that
-### Encryption will be as follows (store this in your note 🗒)
-01001001 01000001 01001101 01000100 01001000 01000110 01000001 01110010 01001111 01010011 01110100 01101000 01100100 01110101 01010011 00110101 00111000 00110001 01000101 01100100 01100010 01001000 01010001 01001110 00110110 01110101 01010011 01011010 01111001 01000100 01110111 01110101 01101110 01111001 01110000 01101111 01010111 00110111 01010101 01001111 01100100 00111000 01001101 00111101
+### 🎯 Why This Tool?
 
-### after this if you decrypt you will get
-@dvcAbcd@156@nbc
+- **🔒 Secure**: AES-128 encryption with military-grade security
+- **📱 Portable**: Single HTML file - works anywhere
+- **👀 Privacy**: Everything happens in your browser
+- **💾 Storage**: Store encrypted passwords in notes (Google Keep, etc.)
+- **🔄 Two-way**: Encrypt and decrypt anytime with the right key
 
-# remove prefix and post fix and your password is here
-Abcd@156
+## ✨ Features
 
+### 🛡️ **Security Features**
+- 🔐 **AES-128 Encryption** - Military-grade security
+- 🔑 **16-character keys** - Optimal security level
+- 🌐 **Binary output** - Store anywhere safely
+- ✅ **Key validation** - Prevents errors
 
-#Encryption
-this generate the string into binary
+### 🎨 **User Experience**
+- 📱 **Responsive design** - Works on all devices
+- 🎯 **Real-time validation** - Instant feedback
+- 📋 **Copy/Paste support** - Easy data transfer
+- 📁 **File upload/download** - Bulk operations
+- 🔄 **Collapsible sections** - Clean interface
 
-#Decryption
-this generate binary to string
+### 🚀 **Performance**
+- ⚡ **Fast encryption** - Instant results
+- 💻 **Client-side only** - No server needed
+- 🌍 **Network accessible** - Use from any device
 
+## 🚀 Quick Start
 
-Features
+```bash
+# 1. Clone the repository
+git clone https://github.com/RenishBatada/password-protections-by-aes-and-binary.git
+cd password-protections-by-aes-and-binary
 
-zConverts text to binary before encryption.
+# 2. Make executable (Linux/macOS)
+chmod +x start.sh
 
-Uses AES-128 with CBC mode and PKCS5 padding.
+# 3. Start the server
+./start.sh
 
-Allows specifying an Initialization Vector (IV) and Secret Key.
+# 4. Open browser
+# http://localhost:8001
+```
 
-Provides encrypted output in binary format.
+## ⚙️ Setup
 
-Decrypts binary encrypted text back to the original string.
+📋 **Setup Instructions**: See [SETUP.md](SETUP.md) for complete setup guide
 
-#Setup
+### 🎯 Quick Options
+- **🚀 Automatic**: `./start.sh` (recommended)
+- **🐍 Python 3**: `python3 -m http.server 8001 --bind 0.0.0.0`
+- **🔧 Port Config**: Edit `.env` file (default: 8001)
 
-Open the index.html file in a web browser to use the tool.
+<details>
+<summary>🔧 View All Setup Methods</summary>
 
-#Usage
+### Available Setup Methods:
+1. **🚀 Automatic**: `./start.sh` (recommended)
+2. **🐍 Python 3**: `python3 -m http.server 8001 --bind 0.0.0.0`
+3. **🐍 Python 2**: `python -m http.server 8001 --bind 0.0.0.0`
+4. **📦 Node.js**: `npx http-server -p 8001 -a 0.0.0.0`
+5. **🐘 PHP**: `php -S 0.0.0.0:8001`
 
-Enter text in the encryption section and provide a secret key.
+For detailed instructions, troubleshooting, and advanced options, see [SETUP.md](SETUP.md).
 
-Click 'Encrypt' to get the binary encrypted output.
+</details>
 
-Copy the binary output and paste it in the decryption section.
+## 📖 Usage
 
-Enter the same secret key and IV, then click 'Decrypt' to retrieve the original text.
+### 🔤 **Encryption Process**
+1. 📝 Enter your plain text
+2. 🔑 Set a 16-character secret key
+3. ⚙️ (Optional) Configure advanced settings
+4. 🔒 Click **Encrypt**
+5. 📋 Copy the binary output
 
-Dependencies
+### 🔓 **Decryption Process**
+1. 📋 Paste binary encrypted text
+2. 🔑 Enter the same secret key
+3. ⚙️ (Optional) Configure same settings
+4. 🔓 Click **Decrypt**
+5. 👀 Get your original text back
 
-CryptoJS (local version included in the project)
+### 💡 **Pro Tips**
+- 🎯 **Use strong keys**: Mix letters, numbers, symbols
+- 📝 **Remember your keys**: Without them, data is lost forever
+- 🔄 **Same settings**: Use identical settings for encrypt/decrypt
+- 📱 **Mobile friendly**: Works on phones/tablets
 
-Notes
+## 🔧 How It Works
 
-If no IV is provided, a default zero-based IV is used.
+### 🔄 **Encryption Flow**
+```
+Plain Text → AES-128 Encryption → Binary Output
+```
 
-The key should be exactly 16 characters long (128 bits).
+### 🔓 **Decryption Flow**
+```
+Binary Input → Plain Text → AES-128 Decryption 
+```
+
+### 🛡️ **Security Details**
+- **🔐 Algorithm**: AES-128 (Advanced Encryption Standard)
+- **🔀 Mode**: CBC (Cipher Block Chaining)
+- **📦 Padding**: PKCS7
+- **🔑 Key Size**: 128 bits (16 characters)
+- **🌐 Output**: Binary format (1s and 0s)
+
+## ⚖️ License
+
+📄 **License**: See [LICENSE](LICENSE) for complete terms
+
+<details>
+<summary>⚖️ View License Summary</summary>
+
+### 👤 **Owner**: Renishali (Renish) Batada
+
+### ✅ **What You CAN Do**
+- 👀 View and read the source code
+- 📚 Learn from the code
+- 🎓 Use for educational purposes
+- 👤 Personal, non-commercial use
+
+### ❌ **What You CANNOT Do**
+- 💰 Commercial use (selling, SaaS, business operations)
+- 🔧 Modify or create derivative works
+- 📦 Use in commercial products
+
+### 📧 **Permission Required**
+For commercial use or modifications, contact:
+- **📧 Email**: batada.renish@gmail.com
+- **📝 Subject**: "AES Tool License Request - [Your Purpose]"
+
+For complete legal terms and conditions, see [LICENSE](LICENSE).
+
+</details>
+
+## 📞 Support
+
+### 🆘 **Need Help?**
+- 📖 Check [SETUP.md](SETUP.md) for setup issues
+- 📧 Email: batada.renish@gmail.com
+- 🐛 Report issues on GitHub
+
+### 🎉 **Enjoy the Tool!**
+> 🔐 **Secure your passwords with AES encryption!**
+
+---
+
+<div align="center">
+
+**🌟 Made with ❤️ by Renishali (Renish) Batada**
+
+[🔗 GitHub Repository](https://github.com/RenishBatada/password-protections-by-aes-and-binary.git) • 
+[📧 Contact](mailto:batada.renish@gmail.com) • 
+[⚖️ License](LICENSE)
+
+</div>
 

@@ -3,106 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AES Encryption/Decryption</title>
-    <script src="javascript.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { display: flex; justify-content: space-between; padding: 20px; }
-        .box { width: 45%; border: 1px solid #ccc; padding: 20px; }
-        textarea, input, select { width: 100%; margin: 10px 0; padding: 5px; }
-        button { background: black; color: white; padding: 10px; border: none; width: 100%; cursor: pointer; }
-    </style>
+    <title>AES-128 Encryption Tool Online (Binary Output) | CBC Mode | Renish Batada</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free online AES-128 encryption tool with binary output. Secure passwords using CBC mode encryption. No data stored, client-side processing only.">
+    <meta name="keywords" content="AES encryption, password protection, binary encryption, data security, encryption tool, AES-128, CBC mode, password manager">
+    <meta name="author" content="Renishali (Renish) Batada">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://encrypt.renishbatada.com">
+    <meta property="og:title" content="AES-128 Encryption Tool Online (Binary Output)">
+    <meta property="og:description" content="Free online AES-128 encryption tool with binary output. Secure passwords using CBC mode encryption. No data stored.">
+    <meta property="og:image" content="https://encrypt.renishbatada.com/og-image.jpg">
+    <meta property="og:site_name" content="Renish Batada Tools">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://encrypt.renishbatada.com">
+    <meta property="twitter:title" content="AES-128 Encryption Tool Online (Binary Output)">
+    <meta property="twitter:description" content="Free online AES-128 encryption tool with binary output. Secure passwords using CBC mode encryption. No data stored.">
+    <meta property="twitter:image" content="https://encrypt.renishbatada.com/og-image.jpg">
+    <meta name="twitter:site" content="@renishbatada">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://encrypt.renishbatada.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- License Information -->
+    <!-- License: This tool is free for personal and educational use. Commercial use requires permission. Contact batada.renish@gmail.com -->
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AES Encryption & Decryption Tool",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Renishali (Renish) Batada"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Renish Batada",
+          "url": "https://renishbatada.com",
+          "sameAs": [
+            "https://github.com/RenishBatada",
+            "https://linkedin.com/in/renish-batada"
+          ],
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://encrypt.renishbatada.com/og-image.jpg"
+          }
+        },
+        "url": "https://encrypt.renishbatada.com",
+        "description": "Free online AES-128 encryption tool with binary output for secure password management. Uses CBC mode with client-side processing."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Renish Batada Tools",
+        "url": "https://encrypt.renishbatada.com"
+      }
+    ]
+    </script>
+    
+    <!-- All scripts are loaded at the end of body -->
 </head>
 <body>
-    <div class="container">
-        <div class="box">
-            <h2>AES Encryption</h2>
-            <label>Enter Plain Text to Encrypt:</label>
-            <textarea id="plainText" placeholder="Enter plain text to be Encrypted"></textarea>
-            <label>Select Cipher Mode:</label>
-            <select id="cipherMode">
-                <option value="CBC">CBC</option>
-            </select>
-            <label>Select Padding:</label>
-            <select id="padding">
-                <option value="Pkcs5Padding">PKCS5Padding</option>
-            </select>
-            <label>Enter IV (Optional):</label>
-            <input type="text" id="iv" placeholder="Enter initialization vector">
-            <label>Key Size in Bits:</label>
-            <select id="keySize">
-                <option value="128">128</option>
-            </select>
-            <label>Enter Secret Key:</label>
-            <input type="text" id="secretKey" placeholder="Enter secret key">
-            <button onclick="encryptText()">Encrypt</button>
-            <h3>AES Encrypted Output (Binary):</h3>
-            <p id="encryptedOutput"></p>
+    <header>
+        <h1>Password Protection with AES Encryption</h1>
+        <p>Securely encrypt and decrypt your sensitive data with binary AES-128 in CBC mode</p>
+        <div class="github-link">
+            <a href="https://github.com/RenishBatada/password-protections-by-aes-and-binary.git" target="_blank" rel="noopener noreferrer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
         </div>
-        <div class="box">
-            <h2>AES Decryption</h2>
-            <label>Enter Binary Encrypted Text:</label>
-            <textarea id="encryptedText" placeholder="Enter binary text to be Decrypted"></textarea>
-            <label>Select Cipher Mode:</label>
-            <select id="decipherMode">
-                <option value="CBC">CBC</option>
-            </select>
-            <label>Select Padding:</label>
-            <select id="decPadding">
-                <option value="Pkcs5Padding">PKCS5Padding</option>
-            </select>
-            <label>Enter IV Used During Encryption (Optional):</label>
-            <input type="text" id="decIv" placeholder="Enter initialization vector">
-            <label>Key Size in Bits:</label>
-            <select id="decKeySize">
-                <option value="128">128</option>
-            </select>
-            <label>Enter Secret Key used for Encryption:</label>
-            <input type="text" id="decSecretKey" placeholder="Enter secret key">
-            <button onclick="decryptText()">Decrypt</button>
-            <h3>AES Decrypted Output:</h3>
-            <p id="decryptedOutput"></p>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Encryption Box -->
+            <div class="box">
+                <h2>AES Encryption</h2>
+                <div class="form-group">
+                    <label for="plainText">Enter Plain Text:</label>
+                    <textarea id="plainText" placeholder="Enter text to be encrypted"></textarea>
+                    <div class="btn-group">
+                        <button id="pastePlainTextBtn" class="btn-copy">Paste from Clipboard</button>
+                    </div>
+                    <div id="pasteEncryptError" class="status-message"></div>
+                </div>
+                
+                <button class="collapsible-header" data-target="encryptAdvanced">Advanced Settings</button>
+                <div id="encryptAdvanced" class="collapsible-content">
+                    <div class="form-group">
+                        <label for="cipherMode">Select Cipher Mode:</label>
+                        <select id="cipherMode">
+                            <option value="CBC">CBC</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="padding">Select Padding:</label>
+                        <select id="padding">
+                            <option value="Pkcs7">PKCS7Padding</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="iv">Enter IV (Optional):</label>
+                        <input type="text" id="iv" placeholder="Enter initialization vector">
+                        <button id="generateIvButton" class="btn-secondary">Generate Random IV</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="keySize">Key Size in Bits:</label>
+                        <select id="keySize">
+                            <option value="128">128</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="secretKey">Enter Secret Key:</label>
+                    <div class="input-with-counter">
+                        <input type="text" id="secretKey" placeholder="Enter secret key (16 characters recommended)">
+                        <span class="char-counter" id="secretKeyCounter">0/16</span>
+                    </div>
+                </div>
+                
+                <button id="encryptButton" class="btn-primary">Encrypt</button>
+                
+                <div id="encryptStatus" class="status-message"></div>
+                
+                <h3>AES Encrypted Output (Binary):</h3>
+                <div class="output-container">
+                    <textarea id="encryptedOutput" class="output-text" readonly></textarea>
+                </div>
+                
+                <div class="btn-group">
+                    <button id="copyEncryptedBtn" class="btn-copy">Copy to Clipboard</button>
+                    <button id="downloadEncryptedBtn" class="btn-download">Download as File</button>
+                </div>
+            </div>
+            
+            <!-- Decryption Box -->
+            <div class="box">
+                <h2>AES Decryption</h2>
+                <div class="form-group">
+                    <label for="encryptedText">Enter Binary Encrypted Text:</label>
+                    <textarea id="encryptedText" placeholder="Enter binary text to be decrypted"></textarea>
+                    <div class="btn-group">
+                        <button id="pasteEncryptedBtn" class="btn-copy">Paste from Clipboard</button>
+                        <div class="btn-secondary upload-btn">
+                            Upload Encrypted File
+                            <input type="file" id="uploadEncryptedBtn" accept=".txt,text/plain">
+                        </div>
+                    </div>
+                    <div id="pasteError" class="status-message"></div>
+                </div>
+                
+                <button class="collapsible-header" data-target="decryptAdvanced">Advanced Settings</button>
+                <div id="decryptAdvanced" class="collapsible-content">
+                    <div class="form-group">
+                        <label for="decipherMode">Select Cipher Mode:</label>
+                        <select id="decipherMode">
+                            <option value="CBC">CBC</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="decPadding">Select Padding:</label>
+                        <select id="decPadding">
+                            <option value="Pkcs7">PKCS7Padding</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="decIv">Enter IV Used During Encryption (Optional):</label>
+                        <input type="text" id="decIv" placeholder="Enter initialization vector">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="decKeySize">Key Size in Bits:</label>
+                        <select id="decKeySize">
+                            <option value="128">128</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="decSecretKey">Enter Secret Key used for Encryption:</label>
+                    <div class="input-with-counter">
+                        <input type="text" id="decSecretKey" placeholder="Enter the same secret key used for encryption">
+                        <span class="char-counter" id="decSecretKeyCounter">0/16</span>
+                    </div>
+                </div>
+                
+                <button id="decryptButton" class="btn-primary">Decrypt</button>
+                
+                <div id="decryptStatus" class="status-message"></div>
+                
+                <h3>AES Decrypted Output:</h3>
+                <div class="output-container">
+                    <textarea id="decryptedOutput" class="output-text" readonly></textarea>
+                </div>
+                
+                <div class="btn-group">
+                    <button id="copyDecryptedBtn" class="btn-copy">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How It Works Section -->
+        <button class="collapsible-header" data-target="howItWorks">How It Works</button>
+        <div id="howItWorks" class="collapsible-content">
+            <div class="box">
+                <h3>Understanding AES Encryption</h3>
+                <p>This tool uses the Advanced Encryption Standard (AES) algorithm with a 128-bit key size in CBC (Cipher Block Chaining) mode to encrypt your data.</p>
+                
+                <h4>Encryption Process:</h4>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <strong>AES-128 Encryption:</strong> Your text is first encrypted using the AES algorithm with your secret key.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <strong>Text to Binary Conversion:</strong> The encrypted data is then converted to its binary representation.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <strong>CBC Mode:</strong> Cipher Block Chaining mode uses an Initialization Vector (IV) to ensure that identical plaintext blocks encrypt to different ciphertext blocks.
+                    </div>
+                </div>
+                
+                <h4>Decryption Process:</h4>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <strong>Binary to Text Conversion:</strong> The binary data is first converted back to encrypted text format.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <strong>AES-128 Decryption:</strong> The encrypted text is then decrypted using the same secret key and IV.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <strong>Result:</strong> The original plaintext is recovered.
+                    </div>
+                </div>
+                
+                <h4>Using This Tool with External Services:</h4>
+                
+                <h5>For Encryption (using other tools):</h5>
+                <ol>
+                    <li>First, encrypt your text using an AES encryption tool with these settings:
+                        <ul>
+                            <li>Mode: CBC</li>
+                            <li>Key Size: 128 bits</li>
+                            <li>Padding: PKCS7</li>
+                            <li>Your Secret Key</li>
+                            <li>Your IV (if you want to specify one)</li>
+                        </ul>
+                    </li>
+                    <li>Then convert the encrypted text to binary using a text-to-binary converter.</li>
+                    <li>You can then paste the binary result in our decryption section.</li>
+                </ol>
+                
+                <h5>For Decryption (using other tools):</h5>
+                <ol>
+                    <li>First, convert the binary text to regular text using a binary-to-text converter.</li>
+                    <li>Then use an AES decryption tool with these settings:
+                        <ul>
+                            <li>Mode: CBC</li>
+                            <li>Key Size: 128 bits</li>
+                            <li>Padding: PKCS7</li>
+                            <li>The same Secret Key you used for encryption</li>
+                            <li>The same IV you used for encryption (if specified)</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Security Tips:</h4>
+                <ul>
+                    <li>Use a strong secret key that's exactly 16 characters (128 bits) long.</li>
+                    <li>Store your encrypted data securely.</li>
+                    <li>For added security, consider adding a prefix and suffix to your password before encryption.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <button class="collapsible-header" data-target="howToUse">How to Use</button>
+        <div id="howToUse" class="collapsible-content">
+            <div class="box">
+                <h3>Quick Guide to Use This Tool</h3>
+                
+                <h4>For Encryption:</h4>
+                <ol>
+                    <li>Enter your plain text in the "Enter Plain Text" field</li>
+                    <li>Optionally, click "Advanced Settings" to configure cipher mode, padding, IV, and key size</li>
+                    <li>Enter your secret key (recommended: 16 characters for 128-bit encryption)</li>
+                    <li>Click the "Encrypt" button</li>
+                    <li>Your encrypted binary text will appear in the output field</li>
+                    <li>Use "Copy to Clipboard" to copy the result or "Download as File" to save it</li>
+                </ol>
+                
+                <h4>For Decryption:</h4>
+                <ol>
+                    <li>Paste your binary encrypted text in the "Enter Binary Encrypted Text" field using "Paste from Clipboard" or type it manually</li>
+                    <li>Alternatively, use "Upload Encrypted File" to load from a file</li>
+                    <li>Optionally, click "Advanced Settings" to configure the same settings used during encryption</li>
+                    <li>Enter the same secret key that was used for encryption</li>
+                    <li>Click the "Decrypt" button</li>
+                    <li>Your original text will appear in the decrypted output field</li>
+                    <li>Use "Copy to Clipboard" to copy the result</li>
+                </ol>
+                
+                <h4>Tips:</h4>
+                <ul>
+                    <li>Always use the same secret key and settings for encryption and decryption</li>
+                    <li>Store your secret key securely - anyone with the key can decrypt your data</li>
+                    <li>The encrypted output contains only binary digits (1s and 0s) with spaces</li>
+                    <li>You can store the encrypted binary text in notes, emails, or any text storage</li>
+                    <li>For maximum security, use a strong, unique secret key for each set of data</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- What is AES Section -->
+        <button class="collapsible-header" data-target="whatIsAES">What is AES?</button>
+        <div id="whatIsAES" class="collapsible-content">
+            <div class="box">
+                <h3>About AES Encryption</h3>
+                
+                <h4>What is AES?</h4>
+                <p>
+                    <strong>AES (Advanced Encryption Standard)</strong> is a symmetric encryption algorithm that was established by the U.S. National Institute of Standards and Technology (NIST) in 2001. It has become the global standard for encrypting electronic data.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Symmetric Encryption</strong>: The same key is used for both encryption and decryption</li>
+                    <li><strong>Block Cipher</strong>: Encrypts data in fixed-size blocks (128-bit blocks)</li>
+                    <li><strong>Multiple Key Sizes</strong>: Supports 128-bit, 192-bit, and 256-bit keys</li>
+                    <li><strong>High Security</strong>: Considered unbreakable by current computing technology</li>
+                    <li><strong>Fast Performance</strong>: Optimized for both software and hardware implementations</li>
+                </ul>
+                
+                <h4>How AES Works (Simplified):</h4>
+                <ol>
+                    <li><strong>Input</strong>: Takes plaintext data and a secret key</li>
+                    <li><strong>Key Expansion</strong>: Expands the secret key into multiple round keys</li>
+                    <li><strong>Rounds</strong>: Applies multiple rounds of transformation (10 rounds for AES-128)</li>
+                    <li><strong>Output</strong>: Produces encrypted ciphertext that looks random</li>
+                </ol>
+                
+                <h4>Why We Use AES-128:</h4>
+                <ul>
+                    <li><strong>Balance</strong>: Perfect balance between security and performance</li>
+                    <li><strong>Standard</strong>: Most widely used and thoroughly tested variant</li>
+                    <li><strong>Sufficient</strong>: 128-bit security is more than enough for all practical purposes</li>
+                    <li><strong>Efficient</strong>: Faster than AES-192/256 while still being extremely secure</li>
+                </ul>
+                
+                <h4>Real-World Applications:</h4>
+                <ul>
+                    <li><strong>WhatsApp</strong>: End-to-end encryption for messages</li>
+                    <li><strong>HTTPS</strong>: Secure web browsing</li>
+                    <li><strong>VPNs</strong>: Virtual Private Networks</li>
+                    <li><strong>File Encryption</strong>: Windows BitLocker, macOS FileVault</li>
+                    <li><strong>Wireless Security</strong>: WPA2/WPA3 encryption</li>
+                </ul>
+                
+                <h4>Security Level:</h4>
+                <p>
+                    AES-128 would require <strong>2^128</strong> operations to break by brute force. 
+                    This is more than the number of atoms in the known universe, making it practically impossible to crack with current technology.
+                </p>
+            </div>
         </div>
     </div>
-    <script>
-        function stringToBinary(str) {
-            return str.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
-        }
-
-        function binaryToString(binary) {
-            return binary.split(' ').map(bin => String.fromCharCode(parseInt(bin, 2))).join('');
-        }
-
-        function encryptText() {
-            let plainText = document.getElementById("plainText").value;
-            let secretKey = document.getElementById("secretKey").value;
-            let iv = document.getElementById("iv").value || CryptoJS.enc.Hex.parse("00000000000000000000000000000000"); // Default IV as zero-bytes
-            
-            let key = CryptoJS.enc.Utf8.parse(secretKey);
-            let ivParsed = typeof iv === "string" ? CryptoJS.enc.Utf8.parse(iv) : iv;
-            let encrypted = CryptoJS.AES.encrypt(plainText, key, {
-                iv: ivParsed,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
-            document.getElementById("encryptedOutput").innerText = stringToBinary(encrypted.toString());
-        }
-
-        function decryptText() {
-            let binaryEncryptedText = document.getElementById("encryptedText").value;
-            let encryptedText = binaryToString(binaryEncryptedText);
-            let secretKey = document.getElementById("decSecretKey").value;
-            let iv = document.getElementById("decIv").value || CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
-            
-            let key = CryptoJS.enc.Utf8.parse(secretKey);
-            let ivParsed = typeof iv === "string" ? CryptoJS.enc.Utf8.parse(iv) : iv;
-            let decrypted = CryptoJS.AES.decrypt(encryptedText, key, {
-                iv: ivParsed,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
-            document.getElementById("decryptedOutput").innerText = decrypted.toString(CryptoJS.enc.Utf8);
-        }
-    </script>
+    
+    <!-- Scripts -->
+    <!-- CryptoJS library must be loaded first -->
+    <script src="javascript.js"></script>
+    <!-- Then our custom scripts -->
+    <script src="js/aes-utils.js"></script>
+    <script src="js/ui-helpers.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

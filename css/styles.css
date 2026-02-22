@@ -1,0 +1,543 @@
+/* Main styles for AES Encryption/Decryption Tool */
+
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3a0ca3;
+    --success-color: #4cc9f0;
+    --error-color: #f72585;
+    --light-gray: #f8f9fa;
+    --dark-gray: #212529;
+    --border-color: #e9ecef;
+    --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --gradient-start: #4361ee;
+    --gradient-end: #3a0ca3;
+    --text-color: #212529;
+    --light-text: #6c757d;
+}
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background-color: var(--light-gray);
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    text-align: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    header {
+        padding: 0.8rem;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    .github-link {
+        bottom: 1.5rem;
+        right: 1rem;
+    }
+    
+    .github-link a {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        border-width: 1.5px;
+    }
+    
+    .github-link svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+h5 {
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+header h1 {
+    color: white !important;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: white !important;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.github-link {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.github-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.github-link a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 1);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+textarea, input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    width: 100%;
+    margin: 15px 0;
+    font-size: 18px;
+    padding: 15px;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-copy {
+    background: #4cc9f0;
+    color: var(--dark-gray);
+}
+
+.btn-download {
+    background: #4361ee;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+/* Collapsible sections */
+.collapsible-header {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    cursor: pointer;
+    padding: 15px 20px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    margin: 15px 0 5px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.collapsible-header:hover {
+    background-color: var(--secondary-color);
+}
+
+.collapsible-header:after {
+    content: '+';
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+.collapsible-header.active {
+    background-color: var(--secondary-color);
+}
+
+.collapsible-header.active:after {
+    content: "−";
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background-color: white;
+    padding: 0;
+    border-radius: 8px;
+    margin: 8px 0 20px;
+    opacity: 0;
+    border: 1px solid transparent;
+}
+
+.collapsible-content.active {
+    opacity: 1;
+    border: 1px solid var(--border-color);
+}
+
+/* Status messages */
+.status-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.success-message {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.error-message {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--error-color);
+    border-left: 4px solid var(--error-color);
+}
+
+/* How it works section */
+.step {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+/* Output display */
+.output-container {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.output-text {
+    word-break: break-all;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background: transparent;
+    border: none;
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.output-text:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Responsive design */
+@media screen and (min-width: 768px) {
+    .main-content {
+        flex-direction: row;
+    }
+    
+    .box {
+        flex: 1;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 1rem;
+    }
+    
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    .box {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .collapsible-header {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+}
+
+/* File upload button styling */
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-btn:hover {
+    background: #5a6268;
+}
+
+.file-upload input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+    display: block;
+}
+
+.btn-group input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+    display: none;
+}
+
+.btn-group .upload-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-group .upload-btn input[type=file] {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Character counter styling */
+.input-with-counter {
+    position: relative;
+}
+
+.char-counter {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--light-text);
+    background: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    pointer-events: none;
+}
+
+.char-counter.valid {
+    color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.char-counter.invalid {
+    color: var(--error-color);
+    border-color: var(--error-color);
+}
+
+/* Copy button styles */
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.copy-btn:hover {
+    background-color: var(--secondary-color);
+}

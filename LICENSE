@@ -1,0 +1,78 @@
+AES ENCRYPTION/DECRYPTION TOOL - LICENSE
+
+Owner: Renishali (Renish) Batada
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software for the following purposes only:
+
+1. VIEWING - To view, read, and examine the source code and documentation
+2. LEARNING - To study, understand, and learn from the source code
+3. EDUCATIONAL USE - To use for educational and learning purposes
+4. PERSONAL USE - To use for personal, non-commercial purposes
+
+The above permissions are subject to the following conditions:
+
+1. NON-COMMERCIAL USE ONLY
+   The Software may NOT be used for commercial purposes, including but not limited to:
+   - Selling the Software or any derivative works
+   - Using the Software in commercial products or services
+   - Using the Software for business operations or profit-making activities
+   - SaaS (Software as a Service) offerings
+   - Any revenue-generating activities
+
+2. NO MODIFICATIONS WITHOUT PERMISSION
+   You may NOT modify, alter, or create derivative works of the Software without
+   explicit written permission from the owner.
+
+3. ATTRIBUTION REQUIRED
+   All copies of the Software must include the original owner notice
+   and this license text.
+
+4. PERMISSION FOR MODIFICATIONS
+   To request permission for modifications, commercial use, or any other
+   purposes not explicitly granted herein, you must contact:
+   
+   Email: batada.renish@gmail.com
+   Subject: "AES Tool License Request - [Your Purpose]"
+   
+   Please include:
+   - Your name and organization
+   - Intended use case
+   - Description of modifications needed (if any)
+   - Duration and scope of use
+
+DISCLAIMER:
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+
+SECURITY NOTICE:
+
+THIS SOFTWARE IS DESIGNED FOR PERSONAL PASSWORD MANAGEMENT USE ONLY.
+THE AUTHOR MAKES NO WARRANTIES REGARDING THE SECURITY OR SUITABILITY OF
+THIS SOFTWARE FOR ANY PARTICULAR PURPOSE. USERS ARE RESPONSIBLE FOR:
+- SECURING THEIR SECRET KEYS
+- VERIFYING THE SUITABILITY FOR THEIR INTENDED USE
+- COMPLIANCE WITH APPLICABLE LAWS AND REGULATIONS
+
+VIOLATION:
+
+Any violation of this license may result in:
+1. Immediate termination of all granted permissions
+2. Legal action to protect intellectual property rights
+3. Requirement to cease all use of the Software
+4. Potential damages for unauthorized commercial use
+
+---
+
+For questions about this license or to request permissions, contact:
+batada.renish@gmail.com
+
+License Version: 1.0
+Last Updated: February 2026
