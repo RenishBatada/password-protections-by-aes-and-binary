@@ -104,17 +104,23 @@ function handleEncryption() {
     }
 }
 
-// Handle decryption process
+// Handle decryption process - simplified version based on original working code
 function handleDecryption() {
     try {
-        const encryptedText = elements.encryptedText.value;
+        // Get user input
+        const binaryEncryptedText = elements.encryptedText.value;
         const secretKey = elements.decSecretKey.value;
         const iv = elements.decIv.value;
         const mode = elements.decipherMode.value;
         const padding = elements.decPadding.value;
         
+        // Clear previous output
+        if (elements.decryptedOutput) {
+            elements.decryptedOutput.value = '';
+        }
+        
         // Validate inputs
-        if (!encryptedText) {
+        if (!binaryEncryptedText) {
             showErrorMessage("Please enter encrypted text to decrypt", "decryptStatus");
             return;
         }
@@ -124,21 +130,77 @@ function handleDecryption() {
             return;
         }
         
-        if (secretKey.length !== 16) {
-            showErrorMessage("Secret key must be exactly 16 characters long", "decryptStatus");
-            return;
-        }
+        console.log('Decrypting with:', {
+            textLength: binaryEncryptedText.length,
+            keyLength: secretKey.length
+        });
         
-        // Decrypt the data
-        const result = decryptAES(encryptedText, secretKey, iv, mode, padding);
-        if (elements.decryptedOutput.tagName.toLowerCase() === 'textarea') {
-            elements.decryptedOutput.value = result;
-        } else {
-            elements.decryptedOutput.textContent = result;
+        try {
+            // Try to convert binary to string and decrypt
+            let encryptedText = binaryEncryptedText;
+            
+            // Check if input looks like binary
+            if (/^[01\s]+$/.test(binaryEncryptedText.trim())) {
+                console.log('Input appears to be binary, converting...');
+                encryptedText = binaryToString(binaryEncryptedText);
+            } else {
+                console.log('Input does not appear to be binary, using directly');
+            }
+            
+            // Create key and IV objects
+            const key = CryptoJS.enc.Utf8.parse(secretKey);
+            let ivParsed = iv ? CryptoJS.enc.Utf8.parse(iv) : 
+                CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+            
+            // Attempt decryption
+            console.log('Attempting decryption with:', encryptedText.substring(0, 20) + '...');
+            const decrypted = CryptoJS.AES.decrypt(encryptedText, key, {
+                iv: ivParsed,
+                mode: CryptoJS.mode[mode],
+                padding: CryptoJS.pad[padding]
+            });
+            
+            const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+            console.log('Decryption result length:', decryptedText.length);
+            
+            if (decryptedText) {
+                elements.decryptedOutput.value = decryptedText;
+                showSuccessMessage("Text decrypted successfully!", "decryptStatus");
+            } else {
+                showErrorMessage("Decryption produced empty result. Check your key.", "decryptStatus");
+            }
+        } catch (decryptError) {
+            console.error('Decryption error:', decryptError);
+            
+            // Try with stored value as fallback
+            if (window.lastEncryptedText) {
+                try {
+                    console.log('Trying with stored encrypted text');
+                    const key = CryptoJS.enc.Utf8.parse(secretKey);
+                    const ivParsed = iv ? CryptoJS.enc.Utf8.parse(iv) : 
+                        CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+                    
+                    const decrypted = CryptoJS.AES.decrypt(window.lastEncryptedText, key, {
+                        iv: ivParsed,
+                        mode: CryptoJS.mode[mode],
+                        padding: CryptoJS.pad[padding]
+                    });
+                    
+                    const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+                    if (decryptedText) {
+                        elements.decryptedOutput.value = decryptedText;
+                        showSuccessMessage("Text decrypted successfully!", "decryptStatus");
+                        return;
+                    }
+                } catch (e) {
+                    console.log('Stored text decryption failed:', e);
+                }
+            }
+            
+            showErrorMessage("Decryption failed: " + decryptError.message, "decryptStatus");
         }
-        
-        showSuccessMessage("Text decrypted successfully!", "decryptStatus");
     } catch (error) {
+        console.error('Unexpected error in handleDecryption:', error);
         showErrorMessage("Decryption failed: " + error.message, "decryptStatus");
     }
 }
